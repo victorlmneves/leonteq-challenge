@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <BooksList :booksList="booksListAux" />
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapActions, mapGetters } from 'vuex'
+import BooksList from '@/components/BooksList.vue'
 
 export default {
-  name: 'Home',
+  name: 'App',
+
   components: {
-    HelloWorld
+    BooksList
+  },
+
+  computed: {
+    ...mapGetters(['booksListAux'])
+  },
+
+  created () {
+    this.getAll()
+  },
+
+  methods: {
+    ...mapActions(['getAll'])
   }
 }
 </script>
